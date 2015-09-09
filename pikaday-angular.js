@@ -35,7 +35,7 @@
 
       restrict: 'A',
       scope: {
-        pikaday: '=', onSelect: '&', onOpen: '&', onClose: '&', onDraw: '&', disableDayFn: '&'
+        pikaday: '=', onSelect: '&', onOpen: '&', onClose: '&', onDraw: '&', disableDayFn: '&',ngModel:"="
       },
       link: function (scope, elem, attrs) {
 
@@ -135,6 +135,7 @@
         // instantiate pikaday with config, bind to scope, add destroy event callback
 
         var picker = new Pikaday(config);
+        picker.setDate(scope.ngModel instanceof Date?scope.ngModel:new Date(scope.ngModel));
         scope.pikaday = picker;
         scope.$on('$destroy', function () {
           picker.destroy();
